@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Complete Bootstrap 4 Website Layout</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link href="style.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://m.w3newbie.com/you-tube.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+<div class="container-fluid">
+	<a class="navbar-brand" href="#"><img src="img/sabanci.png"></a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+		<span class="navbar-toggler-icon"></span>>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarResponsive">
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</nav>
+
+<!--- Image Slider -->
+<div id="slides" class="carousel slide" data-ride="carousel">
+<ul class="carousel-indicators">
+	<li data-target="#slides" data-slide-to="0" class="active"></li>
+	<li data-target="#slides" data-slide-to="1"></li>
+	<li data-target="#slides" data-slide-to="2"></li>
+</ul>	
+<div class="carousel-inner">
+	<div class="carousel-item active">
+		<img src="img/kaitlyn-baker-vZJdYl5JVXY-unsplash.jpg">
+		<div class="carousel-caption">
+			<h1 class="display-2">Sabanci University</h1>
+			<h3>Typing Biometrics Project</h3>
+			<a href="main2.html" class="btn btn-primary btn-lg" role="button">Get Started</a>
+		</div>
+</div>
+</div>
+
+
+<!--- Jumbotron -->
+
+<div class="container-fluid padding">
+<div class="row text-center padding">
+	<div class="col-lg-12">
+		<br>
+		<h2>Instructions: </h2>
+		<p></p>
+		<p>The aim of this project is to collect typing dynamics of various participants over several sessions. </p>
+		<p>This data will be used for research purposes and confidentiality will be maintained.</p>
+		<p>Participants are kindly requested to fill out the form by clicking "Get Started" button.</p>
+		<p>For further information about the project, please scroll down.</p>
+		<br>
+		<a href="main2.html" class="btn btn-primary btn-lg" role="button">Get Started</a>
+		
+	</div>
+</div>
+<hr class="my-4">
+</div>
+<!--- Welcome Section -->
+<div class="container-fluid padding">
+<div class="row welcome text-center">
+	<div class="col-12">
+		<h1 class="display-4">Keystroke Dynamics</h1>
+	</div>
+	<hr>
+	<div class="col-12">
+		<p class="lead">Biometric keyboard dynamics or biometric keystroke is the subject's typing style depending on a behavioural pattern </p>
+	</div>	
+</div>
+</div>
+
+<!--- Three Column Section -->
+
+<!--- Two Column Section -->
+<div class="container-fluid padding">
+<div class="row padding">
+	<div class="col-lg-6">
+		<h2>Abstract </h2>
+		<br>
+		<p>Keystroke biometrics is the user’s typing patterns based on their behavioural characteristics. The objective of this project is to develop software that aims to upgrade user verification using keystroke biometrics, with a focus on Turkish keyboard.   </p>
+		<p>Once the project is completed, the software will have the potential to be used by different online platforms, such as banks, to improve their security.</p>
+		<p>This study will collect a keystroke dataset from Turkish keyboard users, extract certain features from the raw data, and evaluate multiple machine learning algorithms on the data.</p>
+		<br>
+
+	</div>
+	<div class="col-lg-6" >
+		<img src="img/desk.png" class="img-fluid">
+	</div>
+</div>
+</div>
+<hr class="my-4">
+<!--- Fixed background -->
+<figure>
+	<div class="fixed-wrap">
+		<div id="fixed">
+		</div>
+	</div>	
+</figure>
+
+<!--- Emoji Section -->
+<button class="fun" data-toggle="collapse" data-target="#emoji">click for fun</button>
+<div id="emoji" class="collapse">
+<div class="container-fluid padding">
+<div class="row text-center">
+	<div class="col-sm-6 col-md-3">
+		<img class="gif" src="img/gif/panda.gif">
+	</div>
+	<div class="col-sm-6 col-md-3">
+		<img class="gif" src="img/gif/poo.gif">
+	</div>
+	<div class="col-sm-6 col-md-3">
+		<img class="gif" src="img/gif/unicorn.gif">
+	</div>
+	<div class="col-sm-6 col-md-3">
+		<img class="gif" src="img/gif/chicken.gif">
+	</div>
+</div>	
+</div>
+</div>
+  
+<!--- Meet the team -->
+<div class="container-fluid padding">
+<div class="row welcome text-center">	
+	<div class="col-12">
+		<hi class="display-4">Meet the team</hi>
+	</div>
+	<hr>
+</div>
+</div> 
+
+<!--- Cards -->
+<div class="container-fluid padding">
+<div class="row padding">
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/berrin.jpg">
+			<div class="card-body">
+				<h4 class="card-title">Berrin Yanikoglu</h4>
+				<p class="card-text">Supervisor</p>
+				<p class="card-text">Professor at Sabanci University & Director of Sabanci University VERİM (Center of Excellence in Data Analytics)</p>
+				<a href="http://people.sabanciuniv.edu/berrin/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/hasan.jpg">
+			<div class="card-body">
+				<h4 class="card-title">Hasan Alp Boz</h4>
+				<p class="card-text">Co-Supervisor</p>
+				<p class="card-text">Research And Teaching Assistant at Sabanci University</p>
+				<br>
+				<a href="https://www.linkedin.com/in/hasan-aboz/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/mert.png">
+			<div class="card-body">
+				<h4 class="card-title">Mert Gurkan</h4>
+				<p class="card-text">Co-Supervisor</p>
+				<p class="card-text">MSc. Student at Sabanci University</p>
+				<br>
+				<br>
+				<a href="https://www.linkedin.com/in/mert-g%C3%BCrkan/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/team1.png">
+			<div class="card-body">
+				<h4 class="card-title">Amr Subbah</h4>
+				<p class="card-text">Project Assistant</p>
+				<p class="card-text">Sophomore Mechatronics student at Sabanci University</p> 
+				<br>
+				<a href="#" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/jeren.jpeg">
+			<div class="card-body">
+				<h4 class="card-title">Jeren Annagurbanova</h4>
+				<p class="card-text">Project Assistant</p>
+				<p class="card-text">Sophomore Computer Science and Engineering student at Sabanci University</p> 
+				<br>
+				<a href="https://www.linkedin.com/in/a-jeren/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/rawan.jpeg">
+			<div class="card-body">
+				<h4 class="card-title">Rawan Tofik</h4>
+				<p class="card-text">Project Assistant</p>
+				<p class="card-text">Sophomore Molecular Biology and Genetics student at Sabanci University</p> 
+				<br>
+				<a href="https://www.linkedin.com/in/rawan-tofik-3601bb1b8/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/sara.jpeg">
+			<div class="card-body">
+				<h4 class="card-title">Sara Ismail</h4>
+				<p class="card-text">Project Assistant</p>
+				<p class="card-text">Sophomore Mechatronics student at Sabanci University</p> 
+				<br>
+				<a href="#" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card">
+			<img class="card-img-top" src="img/tural.jpeg">
+			<div class="card-body">
+				<h4 class="card-title">Tural Novruzov</h4>
+				<p class="card-text">Project Assistant</p>
+				<p class="card-text">Sophomore Computer Science and Engineering student at Sabanci University</p> 
+				<br>
+				<a href="https://www.linkedin.com/in/turalnovruzov/" class="btn btn-outline-secondary">see profile</a>
+			</div>
+		</div>
+	</div>
+
+
+</div>
+</div>
+
+<div class="container-fluid padding">
+<div class="row welcome text-center">	
+	<div class="col-12">
+		<a href="#" class="btn btn-primary">Go UP</a>
+	</div>
+	<hr>
+</div>
+</div> 
+
+
+		
+
+<!--- Two Column Section -->
+
+
+<!--- Connect -->
+<div class="container-fluid padding">
+<div class="row text-center padding">
+	<div class="col-12">
+		<h2>Connect</h2>
+	</div>
+	<div class="col-12 social padding">
+		<a href="https://www.facebook.com/sabanciuniv.edu/"><i class="fab fa-facebook"></i></a>
+		<a href="https://twitter.com/suiro?lang=en"><i class="fab fa-twitter"></i></a>
+		<a href="https://www.instagram.com/sabanci_university/?hl=en"><i class="fab fa-instagram"></i></a>
+		<a href="https://www.youtube.com/channel/UCr_JmMmZntUFfyCEGWVIorQ"><i class="fab fa-youtube"></i></a>
+		
+	</div>
+</div>
+</div>
+
+<!--- Footer -->
+<footer>
+<div class="container-fluid padding">
+<div class="row text-center">
+	<div class="col-lg-12">
+		<hr class="light">
+		<p>Sabancı University. Orta Mahalle, 34956 Tuzla, İstanbul, Türkiye</p>
+		<p>Phone: +90 216 483 90 00</p>
+		<p>Fax: +90 216 483 90 05</p>
+		
+	</div>
+	<div class="col-12">
+		<hr class="light">
+		<h5>&copy; sabanciuniv.edu</h5>
+	</div>
+</div>
+</div>
+</footer>
+
+
+</body>
+</html>
+
+
+
+
+<!-- View in Browser: Drew's #1 Trending YouTube Tutorial -->
+
+<!-- End View in Browser: Drew's #1 Trending YouTube Tutorial -->
+
+
