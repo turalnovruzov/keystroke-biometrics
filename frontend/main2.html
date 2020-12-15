@@ -9,10 +9,6 @@
     <title>Keystroke Biometrics</title>
 
     <style>
-        body {
-            background: url("img/background1.jpeg");
-        }
-
         .container {
             max-width: 60%;
         }
@@ -21,21 +17,28 @@
 
 <body>
     <div class="container mt-5">
-        <div id="section-email" class="card">
-            <h5 class="card-header text-center">Typing Biometrics</h5>
-            <div class="card-body">
-                <form>
-                    <div class="mb-3">
+        <div class="row my-5 text-center">
+            <h1>Keystroke Biometrics</h4>
+        </div>
+        <div id="section-email" class="p-3 bg-white shadow">
+            <form id="form-email">
+                <div class="row">
+                    <div class="form-group mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
                         <input type="email" class="form-control" id="email-input" aria-describedby="email-help">
                         <div id="email-help" class="form-text">
                             Your email is really important for us. We use your email to identify you between sessions.
-                            We will neither share your email with anyone or email you.
+                            We will neither share your email with anyone nor contact you.
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-            </div>
+                </div>
+
+                <div class="row">
+                    <div class="col text-right">
+                        <button type="submit" class="btn btn-primary float-end">Next</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 
