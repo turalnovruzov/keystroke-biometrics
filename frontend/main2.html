@@ -22,8 +22,8 @@
 
         <div class="rounded-2 p-3 bg-white shadow">
             <!-- Email Section -->
-            <div id="section-email" class="d-none">
-                <form id="form-email" class="section needs-validation" novalidate>
+            <div id="section-email">
+                <form id="form-email" class="needs-validation" novalidate>
                     <div class="form-group mb-3">
                         <label for="email-input" class="form-label">Email Address</label>
                         <input type="email" class="form-control" id="email-input" aria-describedby="email-help" required>
@@ -53,7 +53,7 @@
                         </p>
                     </div>
                 </div>
-                <form id="form-personal" class="section needs-validation" novalidate>
+                <form id="form-personal" class="needs-validation" novalidate>
                     <div class="row mb-3">
                         <div class="col-md-5 form-group">
                             <label for="firstname-input" class="form-label">First Name</label>
@@ -104,7 +104,7 @@
             </div>
 
             <!-- Password -->
-            <div id="section-password-choose">
+            <div id="section-password-choose" class="d-none">
                 <div class="row rounded-1 shadow-sm mx-1 mb-4 bg-light">
                     <div class="col">
                         <p class="mt-2 fs-6">
@@ -112,10 +112,10 @@
                         </p>
                     </div>
                 </div>
-                <form id="form-personal" class="section needs-validation" novalidate>
+                <form id="form-password-choose" novalidate>
                     <div class="form-group mb-3">
                         <label for="password-choose-input" class="form-label">Password</label>
-                        <input type="text" class="form-control" id="password-choose-input" required>
+                        <input type="text" class="form-control" id="password-choose-input">
                     </div>
                     <div class="row mt-3">
                         <div class="col">
