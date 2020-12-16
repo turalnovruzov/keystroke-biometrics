@@ -22,7 +22,7 @@
 
         <div class="rounded-2 p-3 bg-white shadow">
             <!-- Email Section -->
-            <div id="section-email">
+            <div id="section-email" class="d-none">
                 <form id="form-email" class="section needs-validation" novalidate>
                     <div class="form-group mb-3">
                         <label for="email-input" class="form-label">Email Address</label>
@@ -48,7 +48,7 @@
             <div id="section-personal" class="d-none">
                 <div class="row rounded-1 shadow-sm mx-1 mb-4 bg-light">
                     <div class="col">
-                        <p class="fs-6">
+                        <p class="mt-2 fs-6">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh tellus molestie nunc non. Luctus venenatis lectus magna fringilla urna. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis.
                         </p>
                     </div>
@@ -91,6 +91,31 @@
                                 <option value="Other">Other</option>
                             </select>
                         </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <button type="button" class="goback-button btn btn-secondary float-start">Go back</button>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary float-end">Next</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Password -->
+            <div id="section-password-choose">
+                <div class="row rounded-1 shadow-sm mx-1 mb-4 bg-light">
+                    <div class="col">
+                        <p class="mt-2 fs-6">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh tellus molestie nunc non. Luctus venenatis lectus magna fringilla urna. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis.
+                        </p>
+                    </div>
+                </div>
+                <form id="form-personal" class="section needs-validation" novalidate>
+                    <div class="form-group mb-3">
+                        <label for="password-choose-input" class="form-label">Password</label>
+                        <input type="text" class="form-control" id="password-choose-input" required>
                     </div>
                     <div class="row mt-3">
                         <div class="col">
