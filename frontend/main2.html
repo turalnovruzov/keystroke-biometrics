@@ -23,10 +23,13 @@
         <div class="rounded-2 p-3 bg-white shadow">
             <!-- Email Section -->
             <div id="section-email">
-                <form id="form-email" class="section">
+                <form id="form-email" class="section needs-validation" novalidate>
                     <div class="form-group mb-3">
                         <label for="email-input" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" id="email-input" aria-describedby="email-help">
+                        <input type="email" class="form-control" id="email-input" aria-describedby="email-help" required>
+                        <div class="invalid-feedback">
+                            Please enter a valid email address.
+                        </div>
                         <div id="email-help" class="form-text">
                             Your email is really important for us. We use your email to identify you between sessions.
                             We will neither share your email with anyone nor contact you.
