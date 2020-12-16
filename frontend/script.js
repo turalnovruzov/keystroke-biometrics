@@ -19,7 +19,6 @@ function nextSection(event) {
     }
 
     event.preventDefault();
-
 }
 
 function prevSection(event) {
@@ -44,6 +43,8 @@ function passwordChooseNext(event) {
 }
 
 $(document).ready(() => {
+    $("#password-paragraph").html("Your password: " + password);
+
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
     $("#form-password-choose").submit(passwordChooseNext);
