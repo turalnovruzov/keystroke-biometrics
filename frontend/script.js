@@ -1,4 +1,4 @@
-const sections = ["#section-email", "#section-personal", "#section-password-choose"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke"];
 let activeSectionIdx = 0;
 
 const passwordRegex = /^[0-9]{6}$/;
