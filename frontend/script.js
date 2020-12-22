@@ -9,6 +9,8 @@ let password;
 let passwordKeystrokes = [];
 let passwordKeystrokesTmp = [];
 
+let passwordTryNumber = 1;
+
 function moveSection(n) {
     $(sections[activeSectionIdx]).hide();
     activeSectionIdx += n;
@@ -48,11 +50,22 @@ function passwordChooseNext(event) {
     event.preventDefault();
 }
 
+function passwordError() {
+    let input = $("#password-keystroke-input");
+    $("#password-mistake-alert").show();
+    input.prop("disabled", true);
+    input.val('');
+
+    setTimeout(() => {
+        passwordKeystrokesTmp = [];
+        input.prop("disabled", false);
+    }, 1500);
+}
+
 $(document).ready(() => {
     $('.alert .btn-close').click(function(e) {
         $(this).parent().hide();
     });
-
 
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
@@ -74,14 +87,7 @@ $(document).ready(() => {
             event.target.value.slice(0, event.target.value.length) !== password.slice(0, event.target.value.length ||
             event.code === "Backspace")) {
             
-            $("#password-mistake-alert").show();
-            $(event.target).prop("disabled", true);
-            $(event.target).val('');
-
-            setTimeout(() => {
-                $(event.target).prop("disabled", false);
-                passwordKeystrokesTmp = [];
-            }, 1500);
+            passwordError();
         } else {
             passwordKeystrokesTmp.push({
                 time: Date.now(),
@@ -90,4 +96,40 @@ $(document).ready(() => {
             });
         }
     });
+
+    $("#form-password-keystroke").submit((event) => {
+        let input = $("#password-keystroke-input");
+
+        if (input.val() !== password) {
+            passwordError();
+        } else {
+            passwordKeystrokes.push(...passwordKeystrokesTmp);
+            
+            if (passwordTryNumber >= 10) {
+                // TODO: send the data and go the next section
+            } else {
+                input.val('');
+                input.prop('disabled', true);
+
+                let countdown = 5;
+
+                function countdownFunc() {
+                    if (countdown <= 0) {
+                        passwordKeystrokesTmp = [];
+                        input.prop('disabled', false);
+                        $('#password-timer').text('You can enter the password now.');
+                    } else {
+                        $('#password-timer').text(`You can re-enter the password after ${countdown--}...`);
+                        setTimeout(countdownFunc, 1000);
+                    }
+                }
+
+                countdownFunc();
+
+                passwordTryNumber++;
+            }
+        }
+
+        event.preventDefault();
+    })
 });
