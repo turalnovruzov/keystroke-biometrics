@@ -1,3 +1,6 @@
+const DOWN = "Down";
+const UP = "Up";
+
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke"];
 const passwordRegex = /^[0-9]{6}$/;
 let activeSectionIdx = 3;
@@ -46,6 +49,11 @@ function passwordChooseNext(event) {
 }
 
 $(document).ready(() => {
+    $('.alert .btn-close').click(function(e) {
+        $(this).parent().hide();
+    });
+
+
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
     $("#form-password-choose").submit(passwordChooseNext);
@@ -62,16 +70,22 @@ $(document).ready(() => {
         else{
             passwordKeystrokesTmp.push({
                 time: Date.now(),
-                type: "Down",
+                type: DOWN,
                 key: event.code
             });
-            console.log(passwordKeystrokesTmp);
-
-            if(passwordKeystrokesTmp.length === 6){
-                passwordKeystrokes.push(passwordKeystrokesTmp);
-                passwordKeystrokesTmp = [];
-                // counter ++;
-            }
         }
+    });
+
+    $('#password-keystroke-input').keyup((event) => {
+        // if(event.code === "Backspace"){
+        //     passwordKeystrokesTmp = [];
+        //     $('#password-keystroke-input').val('');
+        // }
+
+        passwordKeystrokesTmp.push({
+            time: Date.now(),
+            type: UP,
+            key: event.code
+        });
     });
 });
