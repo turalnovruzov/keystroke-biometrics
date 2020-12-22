@@ -62,30 +62,32 @@ $(document).ready(() => {
     $('#password-keystroke-input').keydown((event) => {
         if (event.repeat) return;
 
-        // if(event.code === "Backspace"){
-        //     passwordKeystrokesTmp = [];
-        //     $('#password-keystroke-input').val('');
-        // }
-
-        else{
-            passwordKeystrokesTmp.push({
-                time: Date.now(),
-                type: DOWN,
-                key: event.code
-            });
-        }
+        passwordKeystrokesTmp.push({
+            time: Date.now(),
+            type: DOWN,
+            key: event.code
+        });
     });
 
     $('#password-keystroke-input').keyup((event) => {
-        // if(event.code === "Backspace"){
-        //     passwordKeystrokesTmp = [];
-        //     $('#password-keystroke-input').val('');
-        // }
+        if (event.target.value.length > 6 ||
+            event.target.value.slice(0, event.target.value.length) !== password.slice(0, event.target.value.length ||
+            event.code === "Backspace")) {
+            
+            $("#password-mistake-alert").show();
+            $(event.target).prop("disabled", true);
+            $(event.target).val('');
 
-        passwordKeystrokesTmp.push({
-            time: Date.now(),
-            type: UP,
-            key: event.code
-        });
+            setTimeout(() => {
+                $(event.target).prop("disabled", false);
+                passwordKeystrokesTmp = [];
+            }, 1500);
+        } else {
+            passwordKeystrokesTmp.push({
+                time: Date.now(),
+                type: UP,
+                key: event.code
+            });
+        }
     });
 });
