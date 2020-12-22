@@ -103,7 +103,7 @@ $(document).ready(() => {
         if (input.val() !== password) {
             passwordError();
         } else {
-            passwordKeystrokes.push(...passwordKeystrokesTmp);
+            passwordKeystrokes.push(passwordKeystrokesTmp);
             
             if (passwordTryNumber >= 10) {
                 // TODO: send the data and go the next section
