@@ -1,8 +1,6 @@
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke"];
-let activeSectionIdx = 0;
-
 const passwordRegex = /^[0-9]{6}$/;
-
+let activeSectionIdx = 3;
 let password;
 
 function moveSection(n) {
@@ -34,6 +32,8 @@ function passwordChooseNext(event) {
         passwordInput.removeClass("is-invalid");
         password = passwordInput.val();
 
+        $("#password-paragraph").html("Your password: " + password);
+
         moveSection(1);
     } else {
         passwordInput.addClass("is-invalid");
@@ -43,8 +43,6 @@ function passwordChooseNext(event) {
 }
 
 $(document).ready(() => {
-    $("#password-paragraph").html("Your password: " + password);
-
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
     $("#form-password-choose").submit(passwordChooseNext);
