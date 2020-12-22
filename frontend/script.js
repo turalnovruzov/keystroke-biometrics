@@ -4,9 +4,9 @@ let activeSectionIdx = 3;
 let password;
 
 function moveSection(n) {
-    $(sections[activeSectionIdx]).addClass("d-none");
+    $(sections[activeSectionIdx]).hide();
     activeSectionIdx += n;
-    $(sections[activeSectionIdx]).removeClass("d-none");
+    $(sections[activeSectionIdx]).show();
 }
 
 function nextSection(event) {
