@@ -82,8 +82,8 @@ function passwordKeydown(event) {
 
 function passwordKeyup(event) {
     if (event.target.value.length > 6 ||
-        event.target.value.slice(0, event.target.value.length) !== password.slice(0, event.target.value.length ||
-        !passwordAllowedKeys.includes(event.code))) {
+        event.target.value.slice(0, event.target.value.length) !== password.slice(0, event.target.value.length) ||
+        !passwordAllowedKeys.includes(event.code)) {
         
         passwordError();
     } else {
@@ -146,6 +146,6 @@ $(document).ready(() => {
     $(".goback-button").click(prevSection);
 
     $('#password-keystroke-input').keydown(passwordKeydown);
-    $('#password-keystroke-input').keyup();
+    $('#password-keystroke-input').keyup(passwordKeyup);
     $("#form-password-keystroke").submit(passwordEntrySubmit);
 });
