@@ -1,9 +1,9 @@
 const DOWN = "Down";
 const UP = "Up";
 
-const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "section-message-keystroke"];
 const passwordRegex = /^[0-9]{6}$/;
-let activeSectionIdx = 3;
+let activeSectionIdx = 0;
 let password;
 
 let passwordKeystrokes = [];
@@ -67,6 +67,12 @@ $(document).ready(() => {
         $(this).parent().hide();
     });
 
+    $('.enter-disabled').keypress((event) => {
+        if (event.which == '13') {
+            event.preventDefault();
+        }
+    });
+
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
     $("#form-password-choose").submit(passwordChooseNext);
@@ -106,7 +112,8 @@ $(document).ready(() => {
             passwordKeystrokes.push(passwordKeystrokesTmp);
             
             if (passwordTryNumber >= 10) {
-                // TODO: send the data and go the next section
+                // TODO: send the data
+                moveSection(1);
             } else {
                 input.val('');
                 input.prop('disabled', true);
@@ -131,5 +138,7 @@ $(document).ready(() => {
         }
 
         event.preventDefault();
-    })
+    });
+
+
 });
