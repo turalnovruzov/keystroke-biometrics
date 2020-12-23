@@ -40,7 +40,7 @@ function passwordChooseNext(event) {
         passwordInput.removeClass("is-invalid");
         password = passwordInput.val();
 
-        $("#password-paragraph").html("Your password: " + password);
+        $("#password-paragraph").text("Your password: " + password);
 
         moveSection(1);
     } else {
@@ -134,6 +134,7 @@ $(document).ready(() => {
                 countdownFunc();
 
                 passwordTryNumber++;
+                $('#password-entry-number').text(`Entry number: ${passwordTryNumber}`)
             }
         }
 
