@@ -1,9 +1,9 @@
 const DOWN = "Down";
 const UP = "Up";
 
-const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "section-message-keystroke"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke"];
 const passwordRegex = /^[0-9]{6}$/;
-let activeSectionIdx = 0;
+let activeSectionIdx = 2;
 let password;
 
 let passwordKeystrokes = [];
@@ -63,7 +63,7 @@ function passwordError() {
 }
 
 $(document).ready(() => {
-    $('.alert .btn-close').click(function(e) {
+    $('.alert .close').click(function(e) {
         $(this).parent().hide();
     });
 
