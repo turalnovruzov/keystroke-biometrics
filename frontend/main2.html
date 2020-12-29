@@ -25,7 +25,7 @@
         <div class="rounded-2 p-3 bg-white shadow">
             
             <!-- Email Section -->
-            <div id="section-email" style="display: none;">
+            <div id="section-email">
                 <form id="form-email" class="needs-validation" novalidate>
                     <div class="form-group mb-3">
                         <label for="email-input" class="form-label">Email Address</label>
@@ -105,14 +105,13 @@
             </div>
 
             <!-- Password Choose Section -->
-            <div id="section-password-choose">
+            <div id="section-password-choose" style="display: none;">
                 <div class="row rounded-1 shadow-sm mx-1 mb-4 p-2 bg-light">
-                    <ul>
-                        <li>Please, create a <em><strong>new password</strong></em> for this website only.</li>
-                        <li>You will need this password for the following sessions.</li>
-                        <li>Password may contain <em><strong>digits only</strong></em>.</li>
-                        <li><em><strong>No characters</strong></em> allowed.</li>
-                    </ul>
+                    <p>
+                        The purpose of this section is for you to choose a password to be used to collect data in the next section.
+                        Therefore, we kindly ask you to create a 6 digit password that will only be used to collect data about you typing patterns.
+                        Note that the password is <strong>not</strong> a real password.
+                    </p>
                 </div>
                 <form id="form-password-choose" novalidate>
                     <div class="form-group mb-3">
@@ -137,7 +136,7 @@
             <div id="section-password-keystroke" style="display: none;">
                 <div class="rounded-1 shadow-sm mx-1 mb-4 p-2 bg-light">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh tellus molestie nunc non. Luctus venenatis lectus magna fringilla urna. Tincidunt augue interdum velit euismod in pellentesque massa placerat duis.
+                        Please enter you chosen password 10 times. Do not type any other keys than digits between 0-9.
                     </p>
                     <p id="password-entry-number">Entry number: 1</p>
                     <p id="password-paragraph"></p>
@@ -152,7 +151,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="password-keystroke-input" class="form-label">Password</label>
-                        <input type="text" id="password-keystroke-input" class="form-control">
+                        <input type="text" id="password-keystroke-input" class="form-control no-copy-cut-paste">
                     </div>
                     <div class="row mt-3">
                         <div class="col">
@@ -180,8 +179,8 @@
                         </button>
                     </div>
                     <div class="form-group mb-3">
-                        <label for="message-keystroke-input" class="form-label">Message</label>
-                        <input type="text" id="message-keystroke-input" class="form-control">
+                        <label for="message-keystroke-textarea" class="form-label">Message</label>
+                        <textarea id="message-keystroke-textarea" class="form-control no-copy-cut-paste" rows="4"></textarea>
                     </div>
                     <div class="row mt-3">
                         <div class="col">

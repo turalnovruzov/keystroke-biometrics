@@ -3,7 +3,7 @@ const UP = "Up";
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke"];
 const passwordRegex = /^[0-9]{6}$/;
-let activeSectionIdx = 2;
+let activeSectionIdx = 0;
 let password;
 
 let passwordKeystrokes = [];
@@ -129,6 +129,11 @@ function passwordEntrySubmit(event) {
     event.preventDefault();
 }
 
+function messageTextareaClick(event) {
+    $(event.target).focus();
+    event.preventDefault();
+}
+
 $(document).ready(() => {
     $('.alert .close').click(function(e) {
         $(this).parent().hide();
@@ -140,6 +145,10 @@ $(document).ready(() => {
         }
     });
 
+    $('.no-copy-cut-paste').on('copy cut paste', (event) => {
+        return false;
+    })
+
     $("#form-email").submit(nextSection);
     $("#form-personal").submit(nextSection);
     $("#form-password-choose").submit(passwordChooseNext);
@@ -148,4 +157,6 @@ $(document).ready(() => {
     $('#password-keystroke-input').keydown(passwordKeydown);
     $('#password-keystroke-input').keyup(passwordKeyup);
     $("#form-password-keystroke").submit(passwordEntrySubmit);
+
+    $('#message-keystroke-textarea').mousedown(messageTextareaClick)
 });
