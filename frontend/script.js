@@ -1,7 +1,7 @@
 const DOWN = "Down";
 const UP = "Up";
 
-const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
 let activeSectionIdx = 0;
 let password;
@@ -43,6 +43,13 @@ function prevSection(event) {
     moveSection(-1);
 
     event.preventDefault();
+}
+
+function personalInfoSubmit(event) {
+    message = `${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`;
+    $('#message-paragraph').text(message);
+
+    nextSection(event);
 }
 
 function passwordChooseNext(event) {
@@ -99,8 +106,7 @@ function passwordEntrySubmit(event) {
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
-        if (passwordTryNumber >= 10) {
-            // TODO: send the data
+        if (passwordTryNumber >= 2) {
             moveSection(1);
         } else {
             input.val('');
@@ -134,6 +140,41 @@ function messageTextareaClick(event) {
     event.preventDefault();
 }
 
+function messageError() {
+    let input = $('#message-keystroke-textarea');
+    $("#message-mistake-alert").show();
+    input.prop("disabled", true);
+    input.val('');
+
+    setTimeout(() => {
+        messageKeystrokes = [];
+        input.prop("disabled", false);
+    }, 1500);
+}
+
+function messageKeydown(event) {
+    if (event.repeat) return;
+
+    messageKeystrokes.push(new Keystroke(DOWN, event.code));
+}
+
+function messageKeyup(event) {
+    messageKeystrokes.push(new Keystroke(UP, event.code));
+}
+
+function messageSubmit(event) {
+    let input = $('#message-keystroke-textarea');
+
+    if (input.val() === message) {
+        // TODO send the data
+        moveSection(1);
+    } else {
+        messageError();
+    }
+
+    event.preventDefault();
+}
+
 $(document).ready(() => {
     $('.alert .close').click(function(e) {
         $(this).parent().hide();
@@ -150,7 +191,7 @@ $(document).ready(() => {
     })
 
     $("#form-email").submit(nextSection);
-    $("#form-personal").submit(nextSection);
+    $("#form-personal").submit(personalInfoSubmit);
     $("#form-password-choose").submit(passwordChooseNext);
     $(".goback-button").click(prevSection);
 
@@ -158,5 +199,8 @@ $(document).ready(() => {
     $('#password-keystroke-input').keyup(passwordKeyup);
     $("#form-password-keystroke").submit(passwordEntrySubmit);
 
-    $('#message-keystroke-textarea').mousedown(messageTextareaClick)
+    $('#message-keystroke-textarea').mousedown(messageTextareaClick);
+    $('#message-keystroke-textarea').keydown(messageKeydown);
+    $('#message-keystroke-textarea').keyup(messageKeyup);
+    $('#form-message-keystroke').submit(messageSubmit);
 });
