@@ -35,7 +35,7 @@ const SubjectSchema = mongoose.Schema({
     },
 
     sessions: [{
-        passwordKeystrokes: [{
+        passwordKeystrokes: [[{
             time: {
                 type: Date,
                 required: true
@@ -48,7 +48,7 @@ const SubjectSchema = mongoose.Schema({
                 type: String,
                 required: true
             }
-        }],
+        }]],
         messageKeystrokes: [{
             time: {
                 type: Date,

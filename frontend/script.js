@@ -1,5 +1,6 @@
 const DOWN = "Down";
 const UP = "Up";
+const BASE_URL = "http://localhost:3000"
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
@@ -106,7 +107,7 @@ function passwordEntrySubmit(event) {
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
-        if (passwordTryNumber >= 2) {
+        if (passwordTryNumber >= 1) {
             moveSection(1);
         } else {
             input.val('');
@@ -166,7 +167,22 @@ function messageSubmit(event) {
     let input = $('#message-keystroke-textarea');
 
     if (input.val() === message) {
-        // TODO send the data
+        fetch(BASE_URL + '/firstSession', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: $('#email-input').val(),
+                firstname: $('#firstname-input').val(),
+                lastname: $('#lastname-input').val(),
+                age: parseInt($('#age-input').val()),
+                gender: $('#gender-select').val(),
+                occupation: $('#occupation-select').val(),
+                passwordKeystrokes: passwordKeystrokes,
+                messageKeystrokes: messageKeystrokes
+            })
+        }).then();
         moveSection(1);
     } else {
         messageError();

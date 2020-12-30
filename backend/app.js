@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const Subject = require('./models/Subject');
 
@@ -11,6 +12,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
         useCreateIndex: true
     }, () => console.log('Connected to the database.'));
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/user/:userEmail', async (req, res) => {
@@ -38,11 +40,9 @@ app.post('/firstSession', async (req, res) => {
     });
 
     try {
-        const savedSubject = await subject.save();
-        console.log(JSON.stringify(savedSubject, null, 2));
+        await subject.save();
         res.sendStatus(204);
     } catch (err) {
-        console.log(JSON.stringify(err, null, 2));
         res.sendStatus(500);
     }
 })
