@@ -1,10 +1,5 @@
 <!doctype html>
 <html lang="en">
-<header>
-    <div class="site-logo">
-        <img src="img/s2.png" alt="logo">
-    </div>
-</header>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,8 +18,11 @@
     <link rel="stylesheet" href="style/style2.css">
 </head>
 <body>
-    <div class="container max-width-50perc mt-5">
-        <div class="my-5 text-center h1">Keystroke Biometrics - Tuş Vuruşu Biyometri</div>
+    <div class="container max-width-50perc mt-4">
+        <div class="site-logo">
+            <img src="img/sabanci_universitesi_logo.jpg" class="mx-auto d-block" width="150rem" alt="logo">
+        </div>
+        <div class="mt-4 mb-5 text-center h1">Keystroke Biometrics - Tuş Vuruşu Biyometri</div>
         <div class="rounded-2 p-3 bg-white shadow">
             <!-- Email Section -->
             <div id="section-email">
@@ -38,8 +36,9 @@
                         <small id="email-help" class="form-text text-muted">
                             Your email is very important to us, it will be used to identify you between sessions.
                             Your email will not be shared with anyone nor be used for contact purposes.
-                            <p>E-postanız bizim için çok önemli, oturumlar arasında sizi tanımak için kullanılacak.
-                                E-postanız kimseyle paylaşılmayacak veya iletişim amacıyla kullanılmayacaktır.</p>
+                            <br>
+                            E-postanız bizim için çok önemli, oturumlar arasında sizi tanımak için kullanılacak.
+                            E-postanız kimseyle paylaşılmayacak veya iletişim amacıyla kullanılmayacaktır.
                         </small>
                     </div>
     
@@ -161,6 +160,7 @@
                 <form id="form-password-keystroke" class="enter-disabled">
                     <div id="password-mistake-alert" class="alert alert-danger alert-dismissible" style="display: none;" role="alert">
                         You made a mistake while typing. Remember that mistakes are not tolerated, users are kindly asked to ONLY enter their correct passwords. 
+                        Yazarken bir hata yaptınız. Hatalı şifreler kabul edilmeyecektir. Bu nedenle, SADECE doğru şifreyi girmenizi rica ediyoruz. 
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -198,9 +198,7 @@
                     </div>
                     <div class="form-group mb-3">
                         <label for="message-keystroke-textarea" class="form-label">Please type the following text in the box below - Lütfen aşağıdaki kutuya aşağıdaki metni yazın:</label>
-                        <p>
-                            <em>Pijamalı hasta, yağız şoföre çabucak güvendi.</em>
-                        </p>
+                        <p id="message-paragraph" class="font-italic">Pijamalı hasta, yağız şoföre çabucak güvendi.</p>
                         <textarea id="message-keystroke-textarea" class="form-control no-copy-cut-paste" rows="3"></textarea>
                     </div>
                     <div class="row mt-3">
