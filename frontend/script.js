@@ -4,6 +4,10 @@ const BASE_URL = "http://localhost:3000"
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
+
+let userId;
+let userExists = false;
+
 let activeSectionIdx = 0;
 let password;
 
@@ -30,14 +34,21 @@ function moveSection(n) {
     $(sections[activeSectionIdx]).show();
 }
 
-function nextSection(event) {
+async function emailSubmit(event) {
+    event.preventDefault();
+    
     if (event.target.checkValidity()) {
-        moveSection(1);
+        let response = await fetch(BASE_URL + '/user/' + $('#email-input').val());
+        if (response.status == 200) {
+            userExists = true;
+            userId = (await response.json())._id;
+            moveSection(2);
+        } else {
+            moveSection(1);
+        }
     } else {
         event.target.classList.add('was-validated');
     }
-
-    event.preventDefault();
 }
 
 function prevSection(event) {
@@ -47,10 +58,15 @@ function prevSection(event) {
 }
 
 function personalInfoSubmit(event) {
-    message = `${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`;
-    $('#message-paragraph').text(message);
+    if (event.target.checkValidity()) {
+        message = `${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`;
+        $('#message-paragraph').text(message);
+        moveSection(1);
+    } else {
+        event.target.classList.add('was-validated');
+    }
 
-    nextSection(event);
+    event.preventDefault();
 }
 
 function passwordChooseNext(event) {
@@ -206,7 +222,7 @@ $(document).ready(() => {
         return false;
     })
 
-    $("#form-email").submit(nextSection);
+    $("#form-email").submit(emailSubmit);
     $("#form-personal").submit(personalInfoSubmit);
     $("#form-password-choose").submit(passwordChooseNext);
     $(".goback-button").click(prevSection);
