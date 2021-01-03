@@ -134,7 +134,7 @@ function passwordEntrySubmit(event) {
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
-        if (passwordTryNumber >= 2) {
+        if (passwordTryNumber >= 10) {
             moveSection(1);
         } else {
             input.val('');
