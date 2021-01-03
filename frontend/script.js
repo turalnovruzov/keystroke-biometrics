@@ -17,7 +17,7 @@ const passwordAllowedKeys = ['Digit0', 'Digit1', 'Digit2', 'Digit3', 'Digit4', '
 
 let passwordTryNumber = 1;
 
-let message = '';
+let message;
 let messageKeystrokes = [];
 
 class Keystroke {
@@ -28,6 +28,16 @@ class Keystroke {
     }
 }
 
+function setPassword(_password) {
+    password = _password;
+    $("#password-paragraph").text("Your password: " + password);
+}
+
+function setMessage(_message) {
+    message = _message;
+    $('#message-paragraph').text(message);
+}
+
 function moveSection(n) {
     $(sections[activeSectionIdx]).hide();
     activeSectionIdx += n;
@@ -36,13 +46,17 @@ function moveSection(n) {
 
 async function emailSubmit(event) {
     event.preventDefault();
-    
+
     if (event.target.checkValidity()) {
         let response = await fetch(BASE_URL + '/user/' + $('#email-input').val());
         if (response.status == 200) {
             userExists = true;
-            userId = (await response.json())._id;
-            moveSection(2);
+
+            let data = await response.json();
+            userId = data._id;
+            setPassword(data.password);
+            setMessage(data.message);
+            moveSection(3);
         } else {
             moveSection(1);
         }
@@ -59,8 +73,7 @@ function prevSection(event) {
 
 function personalInfoSubmit(event) {
     if (event.target.checkValidity()) {
-        message = `${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`;
-        $('#message-paragraph').text(message);
+        setMessage(`${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`);
         moveSection(1);
     } else {
         event.target.classList.add('was-validated');
@@ -74,9 +87,7 @@ function passwordChooseNext(event) {
 
     if (passwordRegex.test(passwordInput.val())) {
         passwordInput.removeClass("is-invalid");
-        password = passwordInput.val();
-
-        $("#password-paragraph").text("Your password: " + password);
+        setPassword(passwordInput.val());
 
         moveSection(1);
     } else {
@@ -123,7 +134,7 @@ function passwordEntrySubmit(event) {
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
-        if (passwordTryNumber >= 1) {
+        if (passwordTryNumber >= 2) {
             moveSection(1);
         } else {
             input.val('');
@@ -183,22 +194,38 @@ function messageSubmit(event) {
     let input = $('#message-keystroke-textarea');
 
     if (input.val() === message) {
-        fetch(BASE_URL + '/firstSession', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: $('#email-input').val(),
-                firstname: $('#firstname-input').val(),
-                lastname: $('#lastname-input').val(),
-                age: parseInt($('#age-input').val()),
-                gender: $('#gender-select').val(),
-                occupation: $('#occupation-select').val(),
-                passwordKeystrokes: passwordKeystrokes,
-                messageKeystrokes: messageKeystrokes
-            })
-        }).then();
+        if (userExists) {
+            fetch(BASE_URL + '/addSession', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    _id: userId,
+                    passwordKeystrokes: passwordKeystrokes,
+                    messageKeystrokes: messageKeystrokes
+                })
+            }).then();
+        } else {
+            fetch(BASE_URL + '/firstSession', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: $('#email-input').val(),
+                    firstname: $('#firstname-input').val(),
+                    lastname: $('#lastname-input').val(),
+                    age: parseInt($('#age-input').val()),
+                    gender: $('#gender-select').val(),
+                    occupation: $('#occupation-select').val(),
+                    password: password,
+                    message: message,
+                    passwordKeystrokes: passwordKeystrokes,
+                    messageKeystrokes: messageKeystrokes
+                })
+            }).then();
+        }
         moveSection(1);
     } else {
         messageError();
