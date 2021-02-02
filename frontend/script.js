@@ -30,7 +30,7 @@ class Keystroke {
 
 function setPassword(_password) {
     password = _password;
-    $("#password-paragraph").text("Your password: " + password);
+    $("#password-paragraph").html(`Your password: ${password}<br><span class="turkish-text">Şifreniz: ${password}</span>`);
 }
 
 function setMessage(_message) {
@@ -143,12 +143,13 @@ function passwordEntrySubmit(event) {
             let countdown = 5;
 
             function countdownFunc() {
-                if (countdown <= 0) {
+                if (countdown <= 1) {
                     passwordKeystrokesTmp = [];
                     input.prop('disabled', false);
-                    $('#password-timer').text('You can enter the password now.');
+                    $('#password-timer').html('You may now enter your password again.<br><span class="turkish-text">Şimdi şifrenizi tekrar girebilirsiniz.</span>');
                 } else {
-                    $('#password-timer').text(`You can re-enter the password after ${countdown--}...`);
+                    countdown--;
+                    $('#password-timer').html(`You can re-enter the password after ${countdown} seconds...<br><span class="turkish-text">${countdown} saniye sonra şifreyi tekrar girebilirsiniz...</span>`);
                     setTimeout(countdownFunc, 1000);
                 }
             }
@@ -156,7 +157,7 @@ function passwordEntrySubmit(event) {
             countdownFunc();
 
             passwordTryNumber++;
-            $('#password-entry-number').text(`Entry number: ${passwordTryNumber}`)
+            $('#password-entry-number').html(`Entry count: ${passwordTryNumber}<br><span class="turkish-text">Giriş sayısı: ${passwordTryNumber}</span>`)
         }
     }
 

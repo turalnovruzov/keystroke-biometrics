@@ -1,3 +1,8 @@
+.turkish-text {
+    font-weight: bold;
+    font-style: italic;
+}
+
 @media (min-width: 992px) {
     .container.max-width-50perc {
       max-width: 800px !important;

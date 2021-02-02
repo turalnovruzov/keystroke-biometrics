@@ -28,7 +28,7 @@ html, body{
 
 .carousel-caption {
   position: absolute;
-  top: 33%;
+  top: 34%;
   transform: translateY(-50%);
 }
 
@@ -39,7 +39,7 @@ html, body{
 }
 
 .carousel-caption h3 {
-  font-size: 200%;
+  font-size: 300%;
   font-weight: 500%;
   text-shadow: 1px 1px 10px #000;
   padding-bottom: 1rem;
@@ -62,13 +62,14 @@ html, body{
 }
 
 .padding {
-  padding-bottom: 2rem;
+  padding-bottom: 0rem;
 }
 
 .welcome {
   width: 75%;
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 0rem;
+  padding-bottom: 3rem;
 }
 
 .welcome hr {
