@@ -22,7 +22,7 @@ app.get('/user/:userEmail', async (req, res) => {
         res.json({
             _id: subject._id,
             password: subject.password,
-            message: subject.message
+            nameMsg: subject.nameMsg
         })
     } else {
         res.sendStatus(404);
@@ -32,16 +32,16 @@ app.get('/user/:userEmail', async (req, res) => {
 app.post('/firstSession', async (req, res) => {
     let subject = new Subject({
         email: req.body.email,
-        firstname: req.body.email,
+        firstname: req.body.firstname,
         lastname: req.body.lastname,
         age: req.body.age,
         gender: req.body.gender,
         occupation: req.body.occupation,
         password: req.body.password,
-        message: req.body.message,
+        nameMsg: req.body.nameMsg,
         sessions: [{
             passwordKeystrokes: req.body.passwordKeystrokes,
-            messageKeystrokes: req.body.messageKeystrokes
+            nameKeystrokes: req.body.nameKeystrokes
         }]
     });
 
@@ -61,7 +61,7 @@ app.put('/addSession', async (req, res) => {
                 $push: {
                     sessions: {
                         passwordKeystrokes: req.body.passwordKeystrokes,
-                        messageKeystrokes: req.body.messageKeystrokes
+                        nameKeystrokes: req.body.nameKeystrokes
                     }
                 }
             }

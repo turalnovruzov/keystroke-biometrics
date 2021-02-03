@@ -33,7 +33,7 @@ const SubjectSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    message: {
+    nameMsg: {
         type: String,
         required: true
     },
@@ -57,7 +57,7 @@ const SubjectSchema = mongoose.Schema({
                 required: true
             }
         }]],
-        messageKeystrokes: [{
+        nameKeystrokes: [{
             time: {
                 type: Date,
                 required: true
