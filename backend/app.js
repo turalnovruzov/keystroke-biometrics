@@ -21,6 +21,7 @@ app.get('/user/:userEmail', async (req, res) => {
     if (subject) {
         res.json({
             _id: subject._id,
+            email: subject.email,
             password: subject.password,
             nameMsg: subject.nameMsg
         })
@@ -41,7 +42,8 @@ app.post('/firstSession', async (req, res) => {
         nameMsg: req.body.nameMsg,
         sessions: [{
             passwordKeystrokes: req.body.passwordKeystrokes,
-            nameKeystrokes: req.body.nameKeystrokes
+            nameKeystrokes: req.body.nameKeystrokes,
+            emailKeystrokes: req.body.emailKeystrokes
         }]
     });
 
@@ -61,7 +63,8 @@ app.put('/addSession', async (req, res) => {
                 $push: {
                     sessions: {
                         passwordKeystrokes: req.body.passwordKeystrokes,
-                        nameKeystrokes: req.body.nameKeystrokes
+                        nameKeystrokes: req.body.nameKeystrokes,
+                        emailKeystrokes: req.body.emailKeystrokes
                     }
                 }
             }

@@ -2,7 +2,7 @@ const DOWN = "Down";
 const UP = "Up";
 const BASE_URL = "http://localhost:3000"
 
-const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#thankyou-section"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#section-email-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
 
 let userId;
@@ -19,6 +19,9 @@ let passwordTryNumber = 1;
 
 let nameMsg;
 let nameKeystrokes = [];
+
+let email;
+let emailKeystrokes = [];
 
 class Keystroke {
     constructor(type, key) {
@@ -38,13 +41,18 @@ function setName(_name) {
     $('#name-paragraph').text(nameMsg);
 }
 
+function setEmail(_email) {
+    email = _email;
+    $('#email-paragraph').text(email);
+}
+
 function moveSection(n) {
     $(sections[activeSectionIdx]).hide();
     activeSectionIdx += n;
     $(sections[activeSectionIdx]).show();
 }
 
-async function emailSubmit(event) {
+async function emailInputSubmit(event) {
     event.preventDefault();
 
     if (event.target.checkValidity()) {
@@ -54,6 +62,7 @@ async function emailSubmit(event) {
 
             let data = await response.json();
             userId = data._id;
+            setEmail(data.email);
             setPassword(data.password);
             setName(data.name);
             moveSection(3);
@@ -74,6 +83,7 @@ function prevSection(event) {
 function personalInfoSubmit(event) {
     if (event.target.checkValidity()) {
         setName(`${$('#firstname-input').val()} ${$('#lastname-input').val()}`);
+        setEmail($('#email-input').val());
         moveSection(1);
     } else {
         event.target.classList.add('was-validated');
@@ -195,10 +205,44 @@ function nameSubmit(event) {
     let input = $('#name-keystroke-textarea');
 
     if (input.val() === nameMsg) {
-        submitData();
         moveSection(1);
     } else {
         nameError();
+    }
+
+    event.preventDefault();
+}
+
+function emailKeystrokeError() {
+    let input = $('#email-keystroke-textarea');
+    $("#email-mistake-alert").show();
+    input.prop("disabled", true);
+    input.val('');
+
+    setTimeout(() => {
+        emailKeystrokes = [];
+        input.prop("disabled", false);
+    }, 1500);
+}
+
+function emailKeystrokeKeydown(event) {
+    if (event.repeat) return;
+
+    emailKeystrokes.push(new Keystroke(DOWN, event.code));
+}
+
+function emailKeystrokeKeyup(event) {
+    emailKeystrokes.push(new Keystroke(UP, event.code));
+}
+
+function emailKeystrokeSubmit(event) {
+    let input = $('#email-keystroke-textarea');
+
+    if (input.val() === email) {
+        submitData();
+        moveSection(1);
+    } else {
+        emailKeystrokeError();
     }
 
     event.preventDefault();
@@ -214,7 +258,8 @@ function submitData()  {
             body: JSON.stringify({
                 _id: userId,
                 passwordKeystrokes: passwordKeystrokes,
-                nameKeystrokes: nameKeystrokes
+                nameKeystrokes: nameKeystrokes,
+                emailKeystrokes: emailKeystrokes
             })
         }).then();
     } else {
@@ -233,7 +278,8 @@ function submitData()  {
                 password: password,
                 nameMsg: nameMsg,
                 passwordKeystrokes: passwordKeystrokes,
-                nameKeystrokes: nameKeystrokes
+                nameKeystrokes: nameKeystrokes,
+                emailKeystrokes: emailKeystrokes
             })
         }).then();
     }
@@ -254,7 +300,7 @@ $(document).ready(() => {
         return false;
     })
 
-    $("#form-email").submit(emailSubmit);
+    $("#form-email").submit(emailInputSubmit);
     $("#form-personal").submit(personalInfoSubmit);
     $("#form-password-choose").submit(passwordChooseNext);
     $(".goback-button").click(prevSection);
@@ -267,4 +313,9 @@ $(document).ready(() => {
     $('#name-keystroke-textarea').keydown(nameKeydown);
     $('#name-keystroke-textarea').keyup(nameKeyup);
     $('#form-name-keystroke').submit(nameSubmit);
+
+    $('#email-keystroke-textarea').mousedown(messageTextareaClick);
+    $('#email-keystroke-textarea').keydown(emailKeystrokeKeydown);
+    $('#email-keystroke-textarea').keyup(emailKeystrokeKeyup);
+    $('#form-email-keystroke').submit(emailKeystrokeSubmit);
 });
