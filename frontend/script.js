@@ -2,7 +2,7 @@ const DOWN = "Down";
 const UP = "Up";
 const BASE_URL = "http://localhost:3000"
 
-const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-message-keystroke", "#thankyou-section"];
+const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#section-email-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
 
 let userId;
@@ -17,8 +17,11 @@ const passwordAllowedKeys = ['Digit0', 'Digit1', 'Digit2', 'Digit3', 'Digit4', '
 
 let passwordTryNumber = 1;
 
-let message;
-let messageKeystrokes = [];
+let nameMsg;
+let nameKeystrokes = [];
+
+let email;
+let emailKeystrokes = [];
 
 class Keystroke {
     constructor(type, key) {
@@ -33,9 +36,14 @@ function setPassword(_password) {
     $("#password-paragraph").html(`Your password: ${password}<br><span class="turkish-text">Şifreniz: ${password}</span>`);
 }
 
-function setMessage(_message) {
-    message = _message;
-    $('#message-paragraph').text(message);
+function setName(_name) {
+    nameMsg = _name;
+    $('#name-paragraph').text(nameMsg);
+}
+
+function setEmail(_email) {
+    email = _email;
+    $('#email-paragraph').text(email);
 }
 
 function moveSection(n) {
@@ -44,7 +52,7 @@ function moveSection(n) {
     $(sections[activeSectionIdx]).show();
 }
 
-async function emailSubmit(event) {
+async function emailInputSubmit(event) {
     event.preventDefault();
 
     if (event.target.checkValidity()) {
@@ -54,8 +62,9 @@ async function emailSubmit(event) {
 
             let data = await response.json();
             userId = data._id;
+            setEmail(data.email);
             setPassword(data.password);
-            setMessage(data.message);
+            setName(data.name);
             moveSection(3);
         } else {
             moveSection(1);
@@ -73,7 +82,8 @@ function prevSection(event) {
 
 function personalInfoSubmit(event) {
     if (event.target.checkValidity()) {
-        setMessage(`${$('#firstname-input').val()} ${$('#lastname-input').val()} ${$('#email-input').val()}`);
+        setName(`${$('#firstname-input').val()} ${$('#lastname-input').val()}`);
+        setEmail($('#email-input').val());
         moveSection(1);
     } else {
         event.target.classList.add('was-validated');
@@ -134,7 +144,7 @@ function passwordEntrySubmit(event) {
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
-        if (passwordTryNumber >= 10) {
+        if (passwordTryNumber >= 1) {
             moveSection(1);
         } else {
             input.val('');
@@ -169,70 +179,110 @@ function messageTextareaClick(event) {
     event.preventDefault();
 }
 
-function messageError() {
-    let input = $('#message-keystroke-textarea');
-    $("#message-mistake-alert").show();
+function nameError() {
+    let input = $('#name-keystroke-textarea');
+    $("#name-mistake-alert").show();
     input.prop("disabled", true);
     input.val('');
 
     setTimeout(() => {
-        messageKeystrokes = [];
+        nameKeystrokes = [];
         input.prop("disabled", false);
     }, 1500);
 }
 
-function messageKeydown(event) {
+function nameKeydown(event) {
     if (event.repeat) return;
 
-    messageKeystrokes.push(new Keystroke(DOWN, event.code));
+    nameKeystrokes.push(new Keystroke(DOWN, event.code));
 }
 
-function messageKeyup(event) {
-    messageKeystrokes.push(new Keystroke(UP, event.code));
+function nameKeyup(event) {
+    nameKeystrokes.push(new Keystroke(UP, event.code));
 }
 
-function messageSubmit(event) {
-    let input = $('#message-keystroke-textarea');
+function nameSubmit(event) {
+    let input = $('#name-keystroke-textarea');
 
-    if (input.val() === message) {
-        if (userExists) {
-            fetch(BASE_URL + '/addSession', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    _id: userId,
-                    passwordKeystrokes: passwordKeystrokes,
-                    messageKeystrokes: messageKeystrokes
-                })
-            }).then();
-        } else {
-            fetch(BASE_URL + '/firstSession', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: $('#email-input').val(),
-                    firstname: $('#firstname-input').val(),
-                    lastname: $('#lastname-input').val(),
-                    age: parseInt($('#age-input').val()),
-                    gender: $('#gender-select').val(),
-                    occupation: $('#occupation-select').val(),
-                    password: password,
-                    message: message,
-                    passwordKeystrokes: passwordKeystrokes,
-                    messageKeystrokes: messageKeystrokes
-                })
-            }).then();
-        }
+    if (input.val() === nameMsg) {
         moveSection(1);
     } else {
-        messageError();
+        nameError();
     }
 
     event.preventDefault();
+}
+
+function emailKeystrokeError() {
+    let input = $('#email-keystroke-textarea');
+    $("#email-mistake-alert").show();
+    input.prop("disabled", true);
+    input.val('');
+
+    setTimeout(() => {
+        emailKeystrokes = [];
+        input.prop("disabled", false);
+    }, 1500);
+}
+
+function emailKeystrokeKeydown(event) {
+    if (event.repeat) return;
+
+    emailKeystrokes.push(new Keystroke(DOWN, event.code));
+}
+
+function emailKeystrokeKeyup(event) {
+    emailKeystrokes.push(new Keystroke(UP, event.code));
+}
+
+function emailKeystrokeSubmit(event) {
+    let input = $('#email-keystroke-textarea');
+
+    if (input.val() === email) {
+        submitData();
+        moveSection(1);
+    } else {
+        emailKeystrokeError();
+    }
+
+    event.preventDefault();
+}
+
+function submitData()  {
+    if (userExists) {
+        fetch(BASE_URL + '/addSession', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                _id: userId,
+                passwordKeystrokes: passwordKeystrokes,
+                nameKeystrokes: nameKeystrokes,
+                emailKeystrokes: emailKeystrokes
+            })
+        }).then();
+    } else {
+        fetch(BASE_URL + '/firstSession', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: $('#email-input').val(),
+                firstname: $('#firstname-input').val(),
+                lastname: $('#lastname-input').val(),
+                age: parseInt($('#age-input').val()),
+                gender: $('#gender-select').val(),
+                occupation: $('#occupation-select').val(),
+                password: password,
+                nameMsg: nameMsg,
+                passwordKeystrokes: passwordKeystrokes,
+                nameKeystrokes: nameKeystrokes,
+                emailKeystrokes: emailKeystrokes
+            })
+        }).then();
+    }
 }
 
 $(document).ready(() => {
@@ -250,7 +300,7 @@ $(document).ready(() => {
         return false;
     })
 
-    $("#form-email").submit(emailSubmit);
+    $("#form-email").submit(emailInputSubmit);
     $("#form-personal").submit(personalInfoSubmit);
     $("#form-password-choose").submit(passwordChooseNext);
     $(".goback-button").click(prevSection);
@@ -259,8 +309,13 @@ $(document).ready(() => {
     $('#password-keystroke-input').keyup(passwordKeyup);
     $("#form-password-keystroke").submit(passwordEntrySubmit);
 
-    $('#message-keystroke-textarea').mousedown(messageTextareaClick);
-    $('#message-keystroke-textarea').keydown(messageKeydown);
-    $('#message-keystroke-textarea').keyup(messageKeyup);
-    $('#form-message-keystroke').submit(messageSubmit);
+    $('#name-keystroke-textarea').mousedown(messageTextareaClick);
+    $('#name-keystroke-textarea').keydown(nameKeydown);
+    $('#name-keystroke-textarea').keyup(nameKeyup);
+    $('#form-name-keystroke').submit(nameSubmit);
+
+    $('#email-keystroke-textarea').mousedown(messageTextareaClick);
+    $('#email-keystroke-textarea').keydown(emailKeystrokeKeydown);
+    $('#email-keystroke-textarea').keyup(emailKeystrokeKeyup);
+    $('#form-email-keystroke').submit(emailKeystrokeSubmit);
 });
