@@ -1,6 +1,6 @@
 const DOWN = "Down";
 const UP = "Up";
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = "http://10.36.48.64:3000"
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#section-email-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
