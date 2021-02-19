@@ -1,6 +1,6 @@
 const DOWN = "Down";
 const UP = "Up";
-const BASE_URL = "http://10.36.48.64:3000";
+const BASE_URL = "http://vpa.sabanciuniv.edu:3000";
 const PASSWORD_TRIES = 10;
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#section-email-keystroke", "#thankyou-section"];
