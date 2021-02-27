@@ -1,7 +1,7 @@
 const DOWN = "Down";
 const UP = "Up";
 const BASE_URL = "https://verim.sabanciuniv.edu/datacollectapi";
-const PASSWORD_TRIES = 1;
+const PASSWORD_TRIES = 3;
 
 const sections = ["#section-email", "#section-personal", "#section-password-choose", "#section-password-keystroke", "#section-name-keystroke", "#section-email-keystroke", "#thankyou-section"];
 const passwordRegex = /^[0-9]{6}$/;
