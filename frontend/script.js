@@ -108,9 +108,10 @@ function passwordChooseNext(event) {
     event.preventDefault();
 }
 
-function passwordError() {
+// alertId in the form of #ID
+function passwordError(alertId) {
     let input = $("#password-keystroke-input");
-    $("#password-mistake-alert").show();
+    $(alertId).show();
     input.prop("disabled", true);
     input.val('');
 
@@ -127,11 +128,13 @@ function passwordKeydown(event) {
 }
 
 function passwordKeyup(event) {
-    if (event.target.value.length > 6 ||
+    if (event.code === "Enter") {
+        passwordError("#password-enter-mistake-alert");
+    } else if (event.target.value.length > 6 ||
         event.target.value.slice(0, event.target.value.length) !== password.slice(0, event.target.value.length) ||
         !passwordAllowedKeys.includes(event.code)) {
         
-        passwordError();
+        passwordError("#password-mistake-alert");
     } else {
         passwordKeystrokesTmp.push(new Keystroke(UP, event.code));
     }
@@ -141,7 +144,7 @@ function passwordEntrySubmit(event) {
     let input = $("#password-keystroke-input");
 
     if (input.val() !== password) {
-        passwordError();
+        passwordError("#password-mistake-alert");
     } else {
         passwordKeystrokes.push(passwordKeystrokesTmp);
         
