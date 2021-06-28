@@ -48,5 +48,13 @@
     "section-name-keystroke-description": "• This section of the project aims to collect typing patterns of users while entering a pre-determined text. The mouse has been disabled for the textbox area, but you may use your keyboard for navigation.",
     "name-mistake-alert-text": "You made a mistake while typing the text, please rewrite the text correctly.",
     "name-keystroke-textarea-label": "Please type the following text in the box below:",
-    "form-name-keystroke-submit": "Next"
+    "form-name-keystroke-submit": "Next",
+
+    "section-email-keystroke-heading": "Keystroke Data Collection for Fixed Text",
+    "section-email-keystroke-description": "• This section of the project aims to collect typing patterns of users while entering a pre-determined text. The mouse has been disabled for the textbox area, but you may use your keyboard for navigation.",
+    "email-mistake-alert-text": "You made a mistake while typing the text, please rewrite the text correctly.",
+    "email-keystroke-textarea-label": "Please type the following text in the box below:",
+    "form-email-keystroke-submit": "Next",
+
+    "thankyou-section-text": "Thank you for your time, we appreciate your contribution to our dataset! 😊"
 }
