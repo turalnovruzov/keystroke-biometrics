@@ -42,5 +42,11 @@
     "password-mistake-alert-text": "• You made a mistake while typing. Remember that mistakes are not tolerated, users are kindly asked to <strong>ONLY</strong> enter their correct passwords.",
     "password-enter-mistake-alert-text": "• The <strong>Enter</strong> button has been disabled. You may submit the password by clicking on the <strong>Next</strong> button.",
     "password-keystroke-input-label": "Password",
-    "form-password-keystroke-submit": "Next"
+    "form-password-keystroke-submit": "Next",
+
+    "section-name-keystroke-heading": "Keystroke Data Collection for Fixed Text",
+    "section-name-keystroke-description": "• This section of the project aims to collect typing patterns of users while entering a pre-determined text. The mouse has been disabled for the textbox area, but you may use your keyboard for navigation.",
+    "name-mistake-alert-text": "You made a mistake while typing the text, please rewrite the text correctly.",
+    "name-keystroke-textarea-label": "Please type the following text in the box below:",
+    "form-name-keystroke-submit": "Next"
 }
